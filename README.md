@@ -36,7 +36,7 @@ To test change the `mode` variable to `test` and set up `test_index`, the networ
 You can download our pre-trained models and results, we give the link below:
 #### [NYU](https://pan.baidu.com/s/1vu-zOmPKG7aCgNwtOKtCjA)
 
-#### [KITTI]()
+#### [KITTI](https://pan.baidu.com/s/1J-amb8CzgG5_muzmU6uAeA)
 
 
 ## License
