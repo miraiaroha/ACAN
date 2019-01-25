@@ -15,11 +15,11 @@ Training takes about 48 hours with the default parameters on the **Eigen** split
 ## Data
 This model requires rectified stereo pairs for training.  
 There are two main datasets available: 
-### [KITTI](http://www.cvlibs.net/datasets/kitti/raw_data.php)
-We used [Eigen](https://cs.nyu.edu/~deigen/depth/) split of the data, amounting for approximately 22k training samples, you can find them in the [kitti_path_txt](kitti_path_txt) folder.  
+#### [KITTI](http://www.cvlibs.net/datasets/kitti/raw_data.php)
+We used [Eigen](https://cs.nyu.edu/~deigen/depth/) split of the data, amounting for approximately 22k training samples, you can find them in the [kitti_path_txt](./kitti_path_txt) folder.  
 
-### [NYU v2](https://cs.nyu.edu/~silberman/datasets/nyu_depth_v2.html)
-We download the raw dataset, which weights about 428GB. We use the toolbox of NYU v2 to sample around 12k training samples, you can find them in the [matlab](matlab) folder.
+#### [NYU v2](https://cs.nyu.edu/~silberman/datasets/nyu_depth_v2.html)
+We download the raw dataset, which weights about 428GB. We use the toolbox of NYU v2 to sample around 12k training samples, you can find them in the [matlab](./matlab) folder.
 
 ## Training
 
