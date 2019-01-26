@@ -38,12 +38,6 @@ You can download our pre-trained models and results, we give the link below:
 
 #### [KITTI](https://pan.baidu.com/s/1J-amb8CzgG5_muzmU6uAeA)
 
-
-## License
-I provide this project for research purposes, please follow `Citing`.
-
-For removal of copyrighted content, please contact me on GitHub.
-
 ## Citing
 If you use this project in academic work, please cite as follows:
 ```
