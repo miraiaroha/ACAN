@@ -10,13 +10,16 @@ If this code and dataset are provided for research purposes, please see License 
 
 ## Architecture
 
-![Network](/images/architecture.png)
+<p align="center">
+    <img src="/images/architecture.png"></br>
+</p>
 
 ## Attention map
 
-![nyu](/images/nyu_v2.png)<br>
-
-![kitti](/images/kitti.png)
+<p align="center">
+    <img src="/images/nyu_v2.png"></br>
+    <img src="/images/kitti.png"></br>
+</p>
 
 ## Requirements
 This code was tested with Pytorch 0.4.1, CUDA 9.1 and Ubuntu 18.04.  
