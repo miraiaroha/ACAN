@@ -8,6 +8,16 @@ This code works on Python 3 & TensorFlow 1.4 and the images in this dataset are 
 
 If this code and dataset are provided for research purposes, please see License section below.
 
+## Architecture
+
+![Network](/images/architecture.png)
+
+## Attention map
+
+![nyu](/images/nyu_v2.png)<br>
+
+![kitti](/images/kitti.png)
+
 ## Requirements
 This code was tested with Pytorch 0.4.1, CUDA 9.1 and Ubuntu 18.04.  
 Training takes about 48 hours with the default parameters on the **KITTI** dataset on a Nvidia GTX1080Ti machine.  
