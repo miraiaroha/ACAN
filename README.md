@@ -10,7 +10,7 @@ If this code and dataset are provided for research purposes, please see License 
 
 ## Requirements
 This code was tested with Pytorch 0.4.1, CUDA 9.1 and Ubuntu 18.04.  
-Training takes about 48 hours with the default parameters on the **Eigen** split on a Nvidia GTX1080Ti machine.  
+Training takes about 48 hours with the default parameters on the **KITTI** dataset on a Nvidia GTX1080Ti machine.  
 
 ## Data
 This model requires rectified stereo pairs for training.  
