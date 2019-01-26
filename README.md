@@ -4,10 +4,6 @@ Pytorch implementation of ACAN for monocular depth estimation.
 **Attention-based Context Aggregation Network for Monocular Depth Estimation**  
 This repository includes our model code.
 
-This code works on Python 3 & TensorFlow 1.4 and the images in this dataset are of actual road scenes captured while unmanned vehicle driving.
-
-If this code and dataset are provided for research purposes, please see License section below.
-
 ## Architecture
 
 <p align="center">
