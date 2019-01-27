@@ -41,15 +41,4 @@ python code/classification/main.py
 ## Testing  
 To test change the `mode` variable to `test` and set up `test_index`, the network will output the depth maps in the main folder.
 
-## Citing
-If you use this project in academic work, please cite as follows:
-```
-@misc{miraiaroha,
-        title={Attention-based Context Aggregation Network for Monocular Depth Estimation},
-        url={https://github.com/miraiaroha/ACAN},
-        author={Yuru, Chen},
-        year={2019},
-        publisher = {GitHub},
-        journal = {GitHub repository}
-}
-```
+
