@@ -41,12 +41,6 @@ python code/classification/main.py
 ## Testing  
 To test change the `mode` variable to `test` and set up `test_index`, the network will output the depth maps in the main folder.
 
-## Results
-You can download our pre-trained models and results, we give the link below:
-#### [NYU](https://pan.baidu.com/s/1vu-zOmPKG7aCgNwtOKtCjA)
-
-#### [KITTI](https://pan.baidu.com/s/1J-amb8CzgG5_muzmU6uAeA)
-
 ## Citing
 If you use this project in academic work, please cite as follows:
 ```
