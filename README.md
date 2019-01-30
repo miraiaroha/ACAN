@@ -25,7 +25,6 @@ This code was tested with Pytorch 0.4.1, CUDA 9.1 and Ubuntu 18.04.
 Training takes about 48 hours with the default parameters on the **KITTI** dataset on a Nvidia GTX1080Ti machine.  
 
 ## Data
-This model requires rectified stereo pairs for training.  
 There are two main datasets available: 
 ### [KITTI](http://www.cvlibs.net/datasets/kitti/raw_data.php)
 We used [Eigen](https://cs.nyu.edu/~deigen/depth/) split of the data, amounting for approximately 22k training samples, you can find them in the [kitti_path_txt](./kitti_path_txt) folder.  
