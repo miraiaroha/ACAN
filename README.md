@@ -4,9 +4,6 @@ Pytorch implementation of ACAN for monocular depth estimation.
 **Attention-based Context Aggregation Network for Monocular Depth Estimation**  
 This repository includes our model code.</br>
 
-For more details:</br>
-[arXiv](https://arxiv.org/abs/1901.10137)
-
 ## Architecture
 
 <p align="center">
