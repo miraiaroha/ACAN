@@ -74,7 +74,7 @@ class CrossEntropy2d(nn.Module):
         else:
             mask = torch.ones_like(label, dtype=torch.float)
         label = label.unsqueeze(3).long()
-        pred = pred.permute(0, 2, 3, 1)
+        pred = F.softmax(pred, 1).permute(0, 2, 3, 1)
         one_hot_label = (torch.arange(self.num_classes)).cuda() == label
         one_hot_label = one_hot_label.float()
         entropy = one_hot_label * self.safe_log(pred) + \
