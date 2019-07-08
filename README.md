@@ -12,7 +12,7 @@ Pytorch implementation of ACAN for monocular depth estimation.</br>
     <img src="/images/nyu_att.png"></br>
     <img src="/images/kitti_att.png"></br>
 </p>
-The first and second row respectively denotes the attention map trained with and w/o 'Attention Loss'. </br>
+The first and second row respectively denotes the attention map trained with and w/o `Attention Loss`. </br>
 
 ## Soft Inference VS Hard Inference
 <p align="center">
