@@ -1,6 +1,7 @@
 # ACAN: Attention-based Context Aggregation Model for Monocular Depth Estimation.
 
-        Pytorch implementation of ACAN for monocular depth estimation.</br>
+Pytorch implementation of ACAN for monocular depth estimation.</br>
+More detalis [arXiv](https://arxiv.org/abs/1901.10137) </br>
 
 ## Architecture
 <p align="center">
@@ -8,20 +9,22 @@
 </p>
 
 ## Visualization of Attention Maps
+
 <p align="center">
     <img src="/images/nyu_att.png"></br>
     <img src="/images/kitti_att.png"></br>
 </p>
-        The first and second row respectively denotes the attention maps trained with and w/o `Attention Loss`. </br>
-        More detalis [arXiv](https://arxiv.org/abs/1901.10137) </br>
+
+* The first and second row respectively denotes the attention maps trained with and w/o `Attention Loss`. </br>
 
 ## Soft Inference VS Hard Inference
+
 <p align="center">
     <img src="/images/soft_vs_hard1.png"></br>
     <img src="/images/soft_vs_hard2.png"></br>
 </p>
-The third column and the fourth column respectively denotes the results of soft inference and hard inference. </br>
 
+* The third column and the fourth column respectively denotes the results of soft inference and hard inference. </br>
 ## Quick start
 
 ### Requirements
