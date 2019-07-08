@@ -1,27 +1,43 @@
-# ACAN
-Pytorch implementation of ACAN for monocular depth estimation.
+# ACAN: Attention-based Context Aggregation Model for Monocular Depth Estimation.
 
-**Attention-based Context Aggregation Network for Monocular Depth Estimation**  
-This repository includes our model code.</br>
+Pytorch implementation of ACAN for monocular depth estimation.</br>
 
 ## Architecture
-
 <p align="center">
     <img src="/images/architecture.png"></br>
 </p>
 
-## Attention map
-
+## Visualization of Attention Maps
 <p align="center">
-    <img src="/images/nyu_v2.png"></br>
-    <img src="/images/kitti.png"></br>
+    <img src="/images/nyu_att.png"></br>
+    <img src="/images/kitti_att.png"></br>
 </p>
+The first and second row respectively denotes the attention map trained with and w/o 'Attention Loss'. </br>
 
-## Requirements
+## Soft Inference VS Hard Inference
+<p align="center">
+    <img src="/images/soft_vs_hard1.png"></br>
+    <img src="/images/soft_vs_hard2.png"></br>
+</p>
+The third column and fourth column respectively denotes the results of soft inference and hard inference. </br>
+
+## Quick start
+
+### Requirements
+~~~~
+torch=0.4.1
+torchvision
+tensorboardX
+pillow
+tqdm
+h5py
+scikit-learn
+cv2
+~~~~
 This code was tested with Pytorch 0.4.1, CUDA 9.1 and Ubuntu 18.04.  
-Training takes about 48 hours with the default parameters on the **KITTI** dataset on a Nvidia GTX1080Ti machine.  
+Training takes about 48 hours with the default parameters on the **KITTI** dataset on a Nvidia GTX1080Ti machine.  </br>
 
-## Data
+### Data
 There are two main datasets available: 
 ### [KITTI](http://www.cvlibs.net/datasets/kitti/raw_data.php)
 We used [Eigen](https://cs.nyu.edu/~deigen/depth/) split of the data, amounting for approximately 22k training samples, you can find them in the [kitti_path_txt](./kitti_path_txt) folder.  
@@ -29,15 +45,31 @@ We used [Eigen](https://cs.nyu.edu/~deigen/depth/) split of the data, amounting 
 ### [NYU v2](https://cs.nyu.edu/~silberman/datasets/nyu_depth_v2.html)
 We download the raw dataset, which weights about 428GB. We use the toolbox of NYU v2 to sample around 12k training samples, you can find them in the [matlab](code/matlab) folder and use `Get_Dataset.m` to produce the training set.
 
-## Training
+### Training
 
 **Warning:** The input sizes need to be mutiples of 8. 
 
 ```shell
-python code/classification/main.py
+bash ./code/train_nyu_script.sh
 ```
 
-## Testing  
-To test change the `mode` variable to `test` and set up `test_index`, the network will output the depth maps in the main folder.
+### Testing  
+```shell
+bash ./code/test_nyu_script.sh
+```
+
+### Attention Map
+If you want to get the task-specific attention maps, you should first train your model from scratch, then finetuning with attention loss, by setting
+~~~~
+BETA=1
+RESUME=./workspace/log/best.pkl
+~~~~
+
+## Thanks to the Third Party Libs
+[Non-local_pytorch](https://github.com/AlexHex7/Non-local_pytorch).
+
+[Pytorch-OCNet](https://github.com/PkuRainBow/OCNet.pytorch)
+
+[NConv-CNN](https://github.com/abdo-eldesokey/nconv-nyu)
 
 
