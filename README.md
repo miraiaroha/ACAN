@@ -1,6 +1,6 @@
 # ACAN: Attention-based Context Aggregation Model for Monocular Depth Estimation.
 
-Pytorch implementation of ACAN for monocular depth estimation.</br>
+        Pytorch implementation of ACAN for monocular depth estimation.</br>
 
 ## Architecture
 <p align="center">
@@ -12,15 +12,15 @@ Pytorch implementation of ACAN for monocular depth estimation.</br>
     <img src="/images/nyu_att.png"></br>
     <img src="/images/kitti_att.png"></br>
 </p>
-The first and second row respectively denotes the attention maps trained with and w/o `Attention Loss`. </br>
-More detalis [arXiv](https://arxiv.org/abs/1901.10137)
+        The first and second row respectively denotes the attention maps trained with and w/o `Attention Loss`. </br>
+        More detalis [arXiv](https://arxiv.org/abs/1901.10137) </br>
 
 ## Soft Inference VS Hard Inference
 <p align="center">
     <img src="/images/soft_vs_hard1.png"></br>
     <img src="/images/soft_vs_hard2.png"></br>
 </p>
-The third column and fourth column respectively denotes the results of soft inference and hard inference. </br>
+The third column and the fourth column respectively denotes the results of soft inference and hard inference. </br>
 
 ## Quick start
 
@@ -67,7 +67,7 @@ RESUME=./workspace/log/best.pkl
 ~~~~
 
 ## Thanks to the Third Party Libs
-[Non-local_pytorch](https://github.com/AlexHex7/Non-local_pytorch).
+[Non-local_pytorch](https://github.com/AlexHex7/Non-local_pytorch)
 
 [Pytorch-OCNet](https://github.com/PkuRainBow/OCNet.pytorch)
 
