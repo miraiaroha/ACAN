@@ -11,7 +11,6 @@ More detalis [arXiv](https://arxiv.org/abs/1901.10137) </br>
 ## Visualization of Attention Maps
 
 <p align="center">
-    <img src="/images/nyu_att.png"></br>
     <img src="/images/kitti_att.png"></br>
 </p>
 
@@ -20,7 +19,6 @@ More detalis [arXiv](https://arxiv.org/abs/1901.10137) </br>
 ## Soft Inference VS Hard Inference
 
 <p align="center">
-    <img src="/images/soft_vs_hard1.png"></br>
     <img src="/images/soft_vs_hard2.png"></br>
 </p>
 
