@@ -59,8 +59,9 @@ class SelfAttentionBlock_(PixelAttentionBlock_):
         self.value_channels = value_channels
         if scale > 1:
             self.pool = nn.MaxPool2d(kernel_size=(scale, scale))
+        kernel_size = 3
         self.f_value = nn.Sequential(OrderedDict([
-            ('conv1',  nn.Conv2d(in_channels, value_channels, kernel_size=3, stride=1, padding=1)),
+            ('conv1',  nn.Conv2d(in_channels, value_channels, kernel_size=kernel_size, stride=1, padding=kernel_size//2)),
             ('relu1',  nn.ReLU(inplace=True)),
             ('conv2',  nn.Conv2d(value_channels, value_channels, kernel_size=1, stride=1)),
             ('relu2',  nn.ReLU(inplace=True))]))
@@ -91,7 +92,7 @@ class SelfAttentionBlock_(PixelAttentionBlock_):
 class SADecoder(nn.Module):
     def __init__(self, in_channels=2048, key_channels=512, value_channels=2048, height=224, width=304):
         super(SADecoder, self).__init__()
-        self.conv = nn.Conv2d(in_channels, in_channels//4, kernel_size=1, stride=1, padding=0)
+        out_channels = 512
         self.saconv = SelfAttentionBlock_(in_channels, key_channels, value_channels)
         self.image_context = nn.Sequential(OrderedDict([
             ('avgpool', nn.AvgPool2d((height // 8, width // 8), padding=0)),
@@ -105,7 +106,7 @@ class SADecoder(nn.Module):
             ('upsample', nn.Upsample(size=(height // 8, width // 8), mode='bilinear', align_corners=True))]))
         self.merge = nn.Sequential(OrderedDict([
             ('dropout1', nn.Dropout2d(0.5, inplace=True)),
-            ('conv1',    nn.Conv2d(in_channels+in_channels//4, in_channels, kernel_size=1, stride=1)),
+            ('conv1',    nn.Conv2d(value_channels+out_channels, value_channels, kernel_size=1, stride=1)),
             ('relu',     nn.ReLU(inplace=True)),
             ('dropout2', nn.Dropout2d(0.5, inplace=False))]))
 
@@ -113,7 +114,6 @@ class SADecoder(nn.Module):
         return self.sim_map
 
     def forward(self, x):
-        x1 = self.conv(x)
         context1, sim_map = self.saconv(x)
         self.sim_map = sim_map
         context2 = self.image_context(x)

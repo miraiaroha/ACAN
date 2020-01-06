@@ -17,7 +17,7 @@ def str2bool(v):
 class Parameters():
     def __init__(self):
         modes = ['train', 'test']
-        encoder_names = ['resnet18', 'resnet34', 'resnet50', 'resnet101']
+        encoder_names = ['resnet50', 'resnet101']
         decoder_names = ['attention']
         classifier_type = ['CE', 'OR', 'OHEM']
         inference_type = ['hard', 'soft']

@@ -96,7 +96,7 @@ class _BaseEntropyLoss2d(nn.Module):
         Description
         -----------
         Information Entropy based loss need to get the entropy according to your implementation, 
-        echo element denotes the loss of a certain position and class.
+        each element denotes the loss of a certain position and class.
         """
         raise NotImplementedError
 
@@ -168,9 +168,9 @@ class CrossEntropy2d(_BaseEntropyLoss2d):
         Parameters
         ----------
         eps : label smoothing factor
-        prior : prior distribution, if uniform equivalent to the 
+        prior : prior distribution, if uniform it is equivalent to the 
                 label smoothing trick (https://arxiv.org/abs/1512.00567).
-                However, gaussian distribution is more friendly with the depth estimation.
+                However, gaussian distribution is more friendly with the depth estimation I think.
         """
         super(CrossEntropy2d, self).__init__(ignore_index, reduction, use_weights, weight)
         self.eps = eps
