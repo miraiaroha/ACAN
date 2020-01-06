@@ -65,6 +65,7 @@ If you want to get the task-specific attention maps, you should first train your
 ~~~~
 BETA=1
 RESUME=./workspace/log/best.pkl
+EPOCHES=10
 ~~~~
 
 ## Thanks to the Third Party Libs

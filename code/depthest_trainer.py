@@ -179,7 +179,7 @@ class DepthEstimationTrainer(Trainer):
             sys.stdout.flush()
             tbar = tqdm(self.valloader)
             rand = np.random.randint(len(self.valloader))
-            for step, data in enumerate(self.valloader):
+            for step, data in enumerate(tbar):
                 images, labels = data[0].to(device), data[1].to(device)
                 # forward
                 before_op_time = time.time()

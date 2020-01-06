@@ -42,8 +42,9 @@ def compute_errors(gt, pred):
     log10 = (safe_log10(gt) - safe_log10(pred)).abs().mean() * batch_size
     abs_rel = ((gt - pred).abs() / gt).mean() * batch_size
     sq_rel = ((gt - pred)**2 / gt).mean() * batch_size
-    measures = {'a1': a1, 'a2': a2, 'a3': a3, 'rmse': rmse,
-                'rmse_log': rmse_log, 'log10': log10, 'abs_rel': abs_rel, 'sq_rel': sq_rel}
+    measures = dict(zip(measure_list, [a1, a2, a3, rmse, rmse_log, log10, abs_rel, sq_rel]))
+    #measures = {'a1': a1, 'a2': a2, 'a3': a3, 'rmse': rmse,
+    #            'rmse_log': rmse_log, 'log10': log10, 'abs_rel': abs_rel, 'sq_rel': sq_rel}
     return measures
 
 
