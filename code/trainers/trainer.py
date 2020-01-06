@@ -213,6 +213,16 @@ class Trainer(object):
     def save(self, epoch, acc):
         self._save_checkpoint(epoch, acc)
         self.print('=> Checkpoint was saved successfully!')
+        self._update_best_epoch(epoch, acc)
+
+    def _update_best_epoch(self, epoch, acc):
+        net_type = type(self.net).__name__
+        if acc >= self.best_acc:
+            last_best = os.path.join(self.logdir, '{}_{:03d}.pkl'.format(net_type, self.best_epoch))
+            if os.path.isfile(last_best):
+                os.remove(last_best)
+            self.best_epoch = epoch
+            self.best_acc = acc
 
     def _save_checkpoint(self, epoch, acc):
         """
@@ -236,12 +246,6 @@ class Trainer(object):
             'save_time': datetime.datetime.now().strftime('%Y%m%d_%H%M%S')
         }
         torch.save(state, cur_save)
-        if acc >= self.best_acc:
-            last_best = os.path.join(self.logdir, '{}_{:03d}.pkl'.format(net_type, self.best_epoch))
-            if os.path.isfile(last_best):
-                os.remove(last_best)
-            self.best_epoch = epoch
-            self.best_acc = acc
         return True
 
     def reload(self, resume, mode='finetune'):

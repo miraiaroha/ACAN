@@ -80,6 +80,8 @@ class BaseClassificationModel_(nn.Module):
     def inference(self, y):
         if isinstance(y, list):
             y = y[-1]
+        if isinstance(y, dict):
+            y = y['y']
         # mode
         # OR = Ordinal Regression
         # CE = Cross Entropy
