@@ -38,8 +38,6 @@ def train(args, net, datasets, criterion, optimizer, scheduler):
             Trainer.reload(resume=resnet, mode='finetune')
     elif args.retain:
         Trainer.reload(resume=args.resume, mode='retain')
-    Trainer.save(1, 0)
-    exit()
     Trainer.train()
     return
 
