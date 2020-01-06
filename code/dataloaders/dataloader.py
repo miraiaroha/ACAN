@@ -8,7 +8,10 @@ import sys
 #sys.path.append(os.path.dirname(__file__))
 import numpy as np
 import torch.utils.data as data
-from .transforms import ToTensor
+try:
+    from .transforms import ToTensor
+except:
+    from transforms import ToTensor
 from PIL import Image
 
 def img_loader(path, is_rgb=True):

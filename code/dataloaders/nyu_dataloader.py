@@ -7,8 +7,12 @@ import os
 import sys
 #sys.path.append(os.path.dirname(__file__))
 import numpy as np
-from .transforms import *
-from .dataloader import MyDataloader
+try:
+    from .transforms import *
+    from .dataloader import MyDataloader
+except:
+    from transforms import *
+    from dataloader import MyDataloader
 from torch.utils.data import DataLoader
 import matplotlib.pyplot as plt
 import torch
