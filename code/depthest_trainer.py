@@ -12,7 +12,7 @@ import shutil
 from tensorboardX import SummaryWriter
 from trainers import Trainer, DataPrefetcher
 from utils import predict_multi_scale, predict_whole_img, compute_errors, \
-                    display_figure, colored_depthmap, merge_images
+                    display_figure, colored_depthmap, merge_images, measure_list
 import torch
 from torch.nn import DataParallel
 import matplotlib.pyplot as plt
@@ -161,15 +161,10 @@ class DepthEstimationTrainer(Trainer):
         self.print("<-------------Evaluate the model-------------->")
         # Evaluate one epoch
         measures, fps = self.eval_epoch(epoch)
-        measures = {key: round(value/self.n_val, 5) for key, value in measures.items()}
         acc = measures['a1']
         self.print('The {}th epoch, fps {:4.2f} | {}'.format(epoch, fps, measures))
         # Save the checkpoint
-        if self.logdir:
-            self.save(epoch, acc)
-        else:
-            if acc >= self.best_acc:
-                self.best_epoch, self.acc = epoch, acc
+        self.save(epoch, acc)
         return measures
 
     def eval_epoch(self, epoch):
@@ -178,43 +173,43 @@ class DepthEstimationTrainer(Trainer):
         self.criterion.to(device)
         self.net.eval()
         val_total_time = 0
-        measure_list = ['a1', 'a2', 'a3', 'rmse', 'rmse_log', 'log10', 'abs_rel', 'sq_rel']
-        measures = dict(zip(measure_list, np.zeros(len(measure_list))))
+        #measure_list = ['a1', 'a2', 'a3', 'rmse', 'rmse_log', 'log10', 'abs_rel', 'sq_rel']
+        measures = {key: 0 for key in measure_list}
         with torch.no_grad():
             sys.stdout.flush()
             tbar = tqdm(self.valloader)
+            rand = np.random.randint(len(self.valloader))
             for step, data in enumerate(self.valloader):
                 images, labels = data[0].to(device), data[1].to(device)
                 # forward
                 before_op_time = time.time()
-                output = self.net(images)
-                depths = self.net.inference(output)
+                y = self.net(images)
+                depths = self.net.inference(y)
                 duration = time.time() - before_op_time
                 val_total_time += duration
                 # accuracy
                 new = self.eval_func(labels, depths)
-                for i in range(len(measure_list)):
-                    measures[measure_list[i]] += new[measure_list[i]].item()
+                for k, v in new.items():
+                    measures[k] += v.item()
                 # display images
-                if step == 10 and self.disp_func is not None:
-                    self.disp_func(self.params, self.writer, self.net, images, labels, depths, epoch)
+                if step == rand and self.disp_func is not None:
+                    visuals = {'inputs': images, 'sim_map': y['sim_map'], 'labels': labels, 'depths': depths}
+                    self.disp_func(self.writer, visuals, epoch)
                 print_str = 'Test step [{}/{}].'.format(step + 1, len(self.valloader))
                 tbar.set_description(print_str)
         fps = self.n_val / val_total_time
+        measures = {key: round(value/self.n_val, 5) for key, value in measures.items()}
         return measures, fps
 
     def test(self):
         n_test = len(self.testset)
-        for k, v in vars(self.params).items():
-            self.print('{0:<22s} : {1:}'.format(k, v))
-        self.print("{0:<22s} : {1:} ".format('testset sample', n_test))
         device = torch.device('cuda:0' if self.use_gpu else 'cpu')
         self.net.to(device)
         self.net.eval()
         self.print("<-------------Test the model-------------->")
         colormaps = {'nyu': plt.cm.jet, 'kitti': plt.cm.plasma}
         cm = colormaps[self.params.dataset]
-        measure_list = ['a1', 'a2', 'a3', 'rmse', 'rmse_log', 'log10', 'abs_rel', 'sq_rel']
+        #measure_list = ['a1', 'a2', 'a3', 'rmse', 'rmse_log', 'log10', 'abs_rel', 'sq_rel']
         measures = {key: 0 for key in measure_list}
         test_total_time = 0
         with torch.no_grad():
@@ -223,12 +218,10 @@ class DepthEstimationTrainer(Trainer):
             for step, data in enumerate(self.testloader):
                 images, labels = data[0].to(device), data[1].to(device)
                 before_op_time = time.time()
+                scales = [1]
                 if self.params.use_ms: 
-                    depths = predict_multi_scale(self.net, images, ([0.75, 1, 1.25]), 
-                        self.params.classes, self.params.use_flip)
-                else:
-                    depths = predict_multi_scale(self.net, images, [1], 
-                        self.params.classes, self.params.use_flip)
+                    scales = [1, 1.25]
+                depths = predict_multi_scale(self.net, images, scales, self.params.classes, self.params.use_flip)
                 duration = time.time() - before_op_time
                 test_total_time += duration
                 # accuracy
@@ -246,9 +239,8 @@ class DepthEstimationTrainer(Trainer):
                 plt.imsave(os.path.join(self.resdir, '{:04}_rgb.png'.format(step)), images)
                 plt.imsave(os.path.join(self.resdir, '{:04}_gt.png'.format(step)), labels)
                 plt.imsave(os.path.join(self.resdir, '{:04}_depth.png'.format(step)), depths)
-
-                for i in range(len(measure_list)):
-                    measures[measure_list[i]] += new[measure_list[i]].item()
+                for k, v in new.items():
+                    measures[k] += v.item()
         fps = n_test / test_total_time
         measures = {key: round(value / n_test, 5) for key, value in measures.items()}
         self.print('Testing done, fps {:4.2f} | {}'.format(fps, measures))

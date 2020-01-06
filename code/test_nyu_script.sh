@@ -19,7 +19,7 @@ TEST_RES_DIR="res"
 MODE="test"
 GPU=True
 TEST_USE_FLIP=True
-TEST_USE_MS=True
+TEST_USE_MS=False
 INFERENCE='soft'
 # set the output path of checkpoints, training log.
 WORKSPACE_DIR="../workspace/"

@@ -11,6 +11,8 @@ import torch.nn.functional as F
 from scipy import ndimage
 from math import ceil
 
+measure_list = ['a1', 'a2', 'a3', 'rmse', 'rmse_log', 'log10', 'abs_rel', 'sq_rel']
+
 def compute_errors(gt, pred):
     """
     Parameters

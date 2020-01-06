@@ -25,11 +25,14 @@ def train(args, net, datasets, criterion, optimizer, scheduler):
                                      sets=list(datasets.keys()),
                                      )
     if args.pretrain:
-        if args.encoder == 'resnet50':
-            resnet = models.resnet50(pretrained=True)
-        elif args.encoder == 'resnet101':
-            resnet = models.resnet101(pretrained=True)
-        if args.resume is not None:
+        if args.encoder[:6] == 'resnet':
+            if hasattr(models, args.encoder):
+                resnet = getattr(models, args.encoder)(pretrained=True)
+            else:
+                raise RuntimeError('network not found.' +
+                    'The network must be either of resnet50 or resnet101.') 
+
+        if args.resume != '':
             Trainer.reload(resume=args.resume, mode='finetune')
         else:
             Trainer.reload(resume=resnet, mode='finetune')

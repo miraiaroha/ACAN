@@ -17,7 +17,7 @@ def str2bool(v):
 class Parameters():
     def __init__(self):
         modes = ['train', 'test']
-        encoder_names = ['resnet50', 'resnet101']
+        encoder_names = ['resnet18', 'resnet34', 'resnet50', 'resnet101']
         decoder_names = ['attention']
         classifier_type = ['CE', 'OR', 'OHEM']
         inference_type = ['hard', 'soft']
@@ -38,41 +38,41 @@ class Parameters():
                             help='decoder: '+'|'.join(decoder_names)+" (default: ['attention'])")
         parser.add_argument('--classes',         type=int,      default=80,
                             help='number of discrete classes of detph (default: 80)')
-        parser.add_argument('--resume',          type=str,
+        parser.add_argument('--resume',                         default='',
                             help='reloaded checkpoint, absolute path (str), given epoch number (int) or nn.Module class')
-        parser.add_argument('--pretrain',        action="store_true",
+        parser.add_argument('--pretrain',        type=str2bool, default=False,
                             help='whether to initialize net from pretrained model')
-        parser.add_argument('--retain',          action="store_true",
+        parser.add_argument('--retain',          type=str2bool, default=False,
                             help='whether to restore the model from breakpoint')
         # dataset settings
         parser.add_argument('--dataset',         type=str,      default='nyu',            choices=dataset_names,
                             help='dataset: '+'|'.join(dataset_names)+' (default: nyu)')
-        parser.add_argument('--rgb-dir',         type=str,      #required=True,
+        parser.add_argument('--rgb-dir',         type=str,      required=True,
                             help='root to rgb')
-        parser.add_argument('--dep-dir',         type=str,      #required=True,
+        parser.add_argument('--dep-dir',         type=str,      required=True,
                            help='root to depth')
-        parser.add_argument('--train-rgb',       type=str,      #required=True,
+        parser.add_argument('--train-rgb',       type=str,      default='',
                             help='path to the rgb txt file of trainset')
-        parser.add_argument('--train-dep',       type=str,      #required=True,
+        parser.add_argument('--train-dep',       type=str,      default='',
                             help='path to the depth txt file of trainset')
-        parser.add_argument('--val-rgb',         type=str,      #required=True,
+        parser.add_argument('--val-rgb',         type=str,      default='',
                              help='path to the rgb txt file of valset')
-        parser.add_argument('--val-dep',         type=str,      #required=True,
+        parser.add_argument('--val-dep',         type=str,      default='',
                             help='path to the depth txt file of valset')
-        parser.add_argument('--test-rgb',        type=str,
+        parser.add_argument('--test-rgb',        type=str,      default='',
                             help='path to the rgb txt file of testset')
-        parser.add_argument('--test-dep',        type=str,
+        parser.add_argument('--test-dep',        type=str,      default='',
                             help='path to the depth txt file of testset')
         # data augmentation settings
-        parser.add_argument("--random-flip",     action="store_true",
+        parser.add_argument("--random-flip",     type=str2bool, default=False,
                             help="whether to randomly left-right flip the inputs during the training.")
-        parser.add_argument("--random-scale",    action="store_true",
+        parser.add_argument("--random-scale",    type=str2bool, default=False,
                             help="whether to randomly scale the inputs during the training.")
-        parser.add_argument("--random-rotate",   action="store_true",
+        parser.add_argument("--random-rotate",   type=str2bool, default=False,
                             help="whether to randomly rotate the inputs during the training.")
-        parser.add_argument("--random-jitter",   action="store_true",
+        parser.add_argument("--random-jitter",   type=str2bool, default=False,
                             help="whether to apply color jitter to the inputs during the training.")
-        parser.add_argument("--random-crop",     action="store_true",
+        parser.add_argument("--random-crop",     type=str2bool, default=False,
                             help="whether to randomly crop the inputs during the training.")
         # criterion settings
         parser.add_argument('--classifier',      type=str,      default='OR',           choices=classifier_type,

@@ -11,7 +11,10 @@ import torch.nn as nn
 import torch.nn.functional as F
 from torch.autograd import Variable
 from collections import OrderedDict
-from .sadecoder import SADecoder
+try:
+    from .sadecoder import SADecoder
+except:
+    from sadecoder import SADecoder
 
 def continuous2discrete(depth, d_min, d_max, n_c):
     mask = 1 - (depth > d_min) * (depth < d_max)
@@ -103,7 +106,7 @@ def make_decoder(command='attention'):
         dec = SADecoder()
     else:
         raise RuntimeError('decoder not found. The decoder must be attention.')
-    return dec()
+    return dec
 
 def make_classifier(classifierType='OR', num_classes=80, use_inter=False, channel1=1024, channel2=2048):
     classes = 2 * num_classes if classifierType == 'OR' else num_classes
@@ -224,7 +227,7 @@ class ResNet(BaseClassificationModel_):
             y = self.decode_ord(y)
             if self.use_inter:
                 inter_y = self.decode_ord(inter_y)
-        return [inter_y, sim_map, y]
+        return {'inter_y': inter_y, 'sim_map': sim_map, 'y': y}
 
     class LossFunc(nn.Module):
         def __init__(self, min_depth, max_depth, num_classes, 
@@ -248,7 +251,9 @@ class ResNet(BaseClassificationModel_):
             label: [batch_size, 1, h, w]
             sim_map 
             """
-            inter_y, sim_map, y = preds
+            inter_y = preds['inter_y']
+            sim_map = preds['sim_map']
+            y = preds['y']
             dis_label = continuous2discrete(label, self.min_depth, self.max_depth, self.num_classes)
             # image loss
             loss1 = self.AppearanceLoss(y, dis_label.squeeze(1).long())
@@ -263,3 +268,14 @@ class ResNet(BaseClassificationModel_):
             total_loss = loss1 + self.alpha * loss2 + self.beta * loss3
             return loss1, loss2, loss3, total_loss
     
+if __name__ == '__main__':
+    net_kwargs = {'min_depth': 0, 'max_depth': 10, 'num_classes': 80,
+                  'classifierType': 'OR', 'inferenceType': 'soft', 'decoderType': 'attention',
+                  'alpha': 0, 'beta': 0, 'layers': [3, 4, 6, 3]}
+
+    net = ResNet(**net_kwargs)
+
+    image = torch.rand(1, 3, 224, 304)
+    output = net(image)
+    print(output['sim_map'].shape)
+    print(output['y'].shape)

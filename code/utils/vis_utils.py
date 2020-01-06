@@ -84,11 +84,12 @@ def imshow_rgb(images, nrow, ncol):
     plt.imshow(images)
     return fig
 
-def display_figure(params, writer, net, images, labels, depths, epoch):
-    m = min(images.shape[0], 4)
-    images_npy = images[:m].cpu().numpy().transpose(0, 2, 3, 1)
-    labels_npy = labels[:m].cpu().numpy().transpose(0, 2, 3, 1)
-    depths_npy = depths[:m].cpu().numpy().transpose(0, 2, 3, 1)
+def display_figure(writer, visuals, epoch):
+    #['inputs', 'sim_map', 'depths', 'labels']
+    m = min(next(iter(visuals.values())).shape[0], 4)
+    images_npy = visuals['inputs'][:m].cpu().numpy().transpose(0, 2, 3, 1)
+    depths_npy = visuals['depths'][:m].cpu().numpy().transpose(0, 2, 3, 1)
+    labels_npy = visuals['labels'][:m].cpu().numpy().transpose(0, 2, 3, 1)
     b, h, w, c = images_npy.shape
     # display image gt and pred figure
     #images = F.interpolate(images, size=(h // 2, w // 2), mode='bilinear', align_corners=True)
@@ -103,8 +104,8 @@ def display_figure(params, writer, net, images, labels, depths, epoch):
     writer.add_figure('figure1-images', fig1, epoch)
     del fuse, images_npy, labels_npy, depths_npy
     # display similarity figure
-    if params.decoder in ['attention']:
-        sim_map = net.decoder.get_sim_map().cpu()
+    if 'sim_map' in visuals.keys():
+        sim_map = visuals['sim_map'].cpu()
         sim_map = sim_map[:b]
         N = sim_map.shape[1]
         points = [N // 4, N // 2, 3 * N // 4]
