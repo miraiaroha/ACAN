@@ -131,14 +131,12 @@ class DepthEstimationTrainer(Trainer):
             time_left = (self.n_steps / self.global_step - 1.0) * time_sofar
             lr = self.optimizer.param_groups[0]['lr']
             if self.verbose > 0 and (step + 1) % (self.steps_per_epoch // self.verbose) == 0:
+                print_str = 'Epoch[{:>2}/{:>2}] | Step[{:>4}/{:>4}] | fps {:4.2f} | Loss1 {:7.3f} | Loss2 {:7.3f} | Loss3 {:7.3f} | elapsed {:.2f}h | left {:.2f}h | lr {:.3e}'. \
+                        format(epoch, self.max_epochs, step + 1, self.steps_per_epoch, fps, loss1, loss2, loss3, time_sofar, time_left, lr)
                 if self.params.classifier == 'OHEM':
                     ratio = self.criterion.AppearanceLoss.ohem_ratio
-                    print_str = 'Epoch[{:>2}/{:>2}] | Step[{:>4}/{:>4}] | fps {:4.2f} | Loss1 {:7.3f} | Loss2 {:7.3f} | Loss3 {:7.3f} | elapsed {:.2f}h | left {:.2f}h | OHEM {:.4f} | lr {:.3e}'. \
-                        format(epoch, self.max_epochs, step + 1, self.steps_per_epoch, fps, loss1, loss2, loss3, time_sofar, time_left, ratio, lr)
+                    print_str += ' | OHEM {:.4f}'.format(ratio)
                     self.writer.add_scalar('OHEM', ratio)
-                else:
-                    print_str = 'Epoch[{:>2}/{:>2}] | Step[{:>4}/{:>4}] | fps {:4.2f} | Loss1 {:7.3f} | Loss2 {:7.3f} | Loss3 {:7.3f} | elapsed {:.2f}h | left {:.2f}h | lr {:.3e}'. \
-                        format(epoch, self.max_epochs, step + 1, self.steps_per_epoch, fps, loss1, loss2, loss3, time_sofar, time_left, lr)
                 self.print(print_str)
             self.writer.add_scalar('loss1', loss1, self.global_step)
             self.writer.add_scalar('loss2', loss2, self.global_step)

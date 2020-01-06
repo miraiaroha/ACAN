@@ -79,8 +79,8 @@ class Parameters():
                             help='classifier: '+'|'.join(classifier_type)+' (default: OR)')
         parser.add_argument('--inference',       type=str,      default='soft',         choices=inference_type,
                             help='inference: '+'|'.join(inference_type)+' (default: soft)')
-        parser.add_argument("--eps",             type=float,    default=0.1,
-                            help="a small value of label smoothing regularization. (default: 0.1)")
+        parser.add_argument("--eps",             type=float,    default=0.0,
+                            help="a small value of label smoothing regularization. (default: 0.0)")
         parser.add_argument("--prior",           type=str,      default='uniform',
                             help="prior distribution of label smoothing regularization. (default: uniform)")
         parser.add_argument("--use-weights",     type=str2bool, default=False,
@@ -143,9 +143,9 @@ class Parameters():
         parser.add_argument('--threads',         type=int,      default=4,
                             help='number of threads for data loading (default: 4)')
         # evaluation settings
-        parser.add_argument("--use-flip",        type=str2bool, default=True,
+        parser.add_argument("--use-flip",        type=str2bool, default=False,
                             help="whether to flip during test-stage.")
-        parser.add_argument("--use-ms",          type=str2bool, default=True,
+        parser.add_argument("--use-ms",          type=str2bool, default=False,
                             help="whether to multi-scale crop during test-stage.")    
         # workspace settings
         parser.add_argument('--workdir',         type=str,      default='../workspace/',
