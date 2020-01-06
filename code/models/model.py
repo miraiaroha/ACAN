@@ -102,10 +102,10 @@ class BaseClassificationModel_(nn.Module):
         raise NotImplementedError
 
     
-def make_decoder(command='attention'):
+def make_decoder(height, width, command='attention'):
     #command = eval(command)
     if command == 'attention':
-        dec = SADecoder()
+        dec = SADecoder(height=height, width=width)
     else:
         raise RuntimeError('decoder not found. The decoder must be attention.')
     return dec
@@ -162,6 +162,7 @@ class Bottleneck(nn.Module):
 class ResNet(BaseClassificationModel_):
     def __init__(self, min_depth, max_depth, num_classes,
                  classifierType, inferenceType, decoderType,
+                 height, width,
                  alpha=0, beta=0,
                  layers=[3, 4, 6, 3], 
                  block=Bottleneck):
@@ -180,7 +181,7 @@ class ResNet(BaseClassificationModel_):
 
         self.alpha = alpha
         self.beta = beta
-        self.decoder = make_decoder(decoderType)
+        self.decoder = make_decoder(height, width, decoderType)
         self.use_inter = self.alpha != 0.0
         self.interout, self.classifier = make_classifier(classifierType, num_classes, self.use_inter, channel1=1024, channel2=2048)
         self.parameter_initialization()

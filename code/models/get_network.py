@@ -12,6 +12,7 @@ def create_network(args):
                            'The network must be either of resnet50 or resnet101.')
     net_kwargs = {'min_depth': args.min_depth, 'max_depth': args.max_depth, 'num_classes': args.classes,
                   'classifierType': args.classifier, 'inferenceType': args.inference, 'decoderType': args.decoder,
+                  'height': args.height, 'width': args.width, 
                   'alpha': args.alpha, 'beta': args.beta, 'layers': setttings}
 
     net = ResNet(**net_kwargs)

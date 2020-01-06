@@ -162,6 +162,8 @@ class Parameters():
 
         if args.dataset == 'nyu':
             args.min_depth, args.max_depth = 0.72, 10.0 # 0.71
+            args.height, args.width = 224, 304
         elif args.dataset == 'kitti':
             args.min_depth, args.max_depth = 1.98, 80.0 # 1.97
+            args.height, args.width = 160, 640
         return args

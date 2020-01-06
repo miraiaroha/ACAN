@@ -4,7 +4,7 @@ nvidia-smi
 # pytorch 04
 PYTHON="$HOME/anaconda3/envs/tensorflow/bin/python"
 # network config
-ENCODER="resnet50"
+ENCODER="resnet101"
 DECODER="attention"
 DATASET="kitti"
 NUM_CLASSES=80
@@ -23,8 +23,8 @@ EPOCHES=50
 LR=2e-4
 FINAL_LR=2e-3
 WEIGHT_DECAY=5e-4
-BATCHSIZE=8
-BATCHSIZEVAL=8
+BATCHSIZE=4
+BATCHSIZEVAL=4
 EVAL_FREQ=1
 THREADS=4
 OPTIMIZER="sgd"
@@ -46,7 +46,7 @@ ALPHA=0
 BETA=0
 # set the output path of checkpoints, training log.
 WORKSPACE_DIR="../workspace/"
-TRAIN_LOG_DIR="log_${ENCODER}${DECODER}_${DATASET}_${CLASSIFIER}_200106a"
+LOG_DIR="log_${ENCODER}${DECODER}_${DATASET}_${CLASSIFIER}_200106a"
 PRETRAIN=True
 ########################################################################################################################
 #  Training
