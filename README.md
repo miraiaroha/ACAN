@@ -45,7 +45,7 @@ There are two main datasets available:
 We used [Eigen](https://cs.nyu.edu/~deigen/depth/) split of the data, amounting for approximately 22k training samples, you can find them in the [kitti_path_txt](./kitti_path_txt) folder.  
 
 ### [NYU v2](https://cs.nyu.edu/~silberman/datasets/nyu_depth_v2.html)
-We download the raw dataset, which weights about 428GB. We use the toolbox of NYU v2 to sample around 12k training samples, you can find them in the [matlab](code/matlab) folder and use `Get_Dataset.m` to produce the training set.
+We download the raw dataset, which weights about 428GB. We use the toolbox of NYU v2 to sample around 12k training samples, you can find them in the [matlab](code/matlab) folder and use `Get_Dataset.m` to produce the training set or download the processed dataset from [BaiduCloud](https://pan.baidu.com/s/1svDzuEruxIr5kEIPMmJKVg).
 
 ### Training
 
