@@ -4,7 +4,7 @@ nvidia-smi
 # pytorch 04
 PYTHON="$HOME/anaconda3/envs/tensorflow/bin/python"
 # network config
-ENCODER="resnet101"
+ENCODER="resnet50"
 DECODER="attention"
 DATASET="kitti"
 NUM_CLASSES=80
