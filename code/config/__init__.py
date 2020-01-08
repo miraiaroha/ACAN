@@ -38,7 +38,7 @@ class Parameters():
                             help='decoder: '+'|'.join(decoder_names)+" (default: ['attention'])")
         parser.add_argument('--classes',         type=int,      default=80,
                             help='number of discrete classes of detph (default: 80)')
-        parser.add_argument('--resume',                         default='',
+        parser.add_argument('--resume',          type=str,      default='',
                             help='reloaded checkpoint, absolute path (str), given epoch number (int) or nn.Module class')
         parser.add_argument('--pretrain',        type=str2bool, default=False,
                             help='whether to initialize net from pretrained model')

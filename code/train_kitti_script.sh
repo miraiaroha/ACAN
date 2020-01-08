@@ -4,7 +4,7 @@ nvidia-smi
 # pytorch 04
 PYTHON="$HOME/anaconda3/envs/tensorflow/bin/python"
 # network config
-ENCODER="resnet50"
+ENCODER="resnet101"
 DECODER="attention"
 DATASET="kitti"
 NUM_CLASSES=80
@@ -23,8 +23,8 @@ EPOCHES=50
 LR=2e-4
 FINAL_LR=2e-3
 WEIGHT_DECAY=5e-4
-BATCHSIZE=4
-BATCHSIZEVAL=4
+BATCHSIZE=5
+BATCHSIZEVAL=5
 EVAL_FREQ=1
 THREADS=4
 OPTIMIZER="sgd"
@@ -46,7 +46,8 @@ ALPHA=0
 BETA=0
 # set the output path of checkpoints, training log.
 WORKSPACE_DIR="../workspace/"
-LOG_DIR="log_${ENCODER}${DECODER}_${DATASET}_${CLASSIFIER}_200106a"
+LOG_DIR="log_${ENCODER}${DECODER}_${DATASET}_${CLASSIFIER}_200108a"
+#RESUME="${WORKSPACE_DIR}log_${ENCODER}${DECODER}_${DATASET}_${CLASSIFIER}_200106a/best.pkl"
 PRETRAIN=True
 ########################################################################################################################
 #  Training
@@ -57,7 +58,7 @@ $PYTHON -u depthest_main.py --mode $MODE --encoder $ENCODER --decoder $DECODER -
                             --dataset $DATASET --rgb-dir $RGB_DIR --dep-dir $DEP_DIR --train-rgb $TRAIN_RGB_TXT --train-dep $TRAIN_DEP_TXT \
                             --val-rgb $VAL_RGB_TXT --val-dep $VAL_DEP_TXT --batch  $BATCHSIZE --batch-val $BATCHSIZEVAL \
                             --optimizer $OPTIMIZER --weight-decay $WEIGHT_DECAY --lr $LR --final-lr $FINAL_LR --gpu $GPU \
-                            --scheduler $SCHEDULER --power $POWER --resume $RESUME \
+                            --scheduler $SCHEDULER --power $POWER \
                             --random-flip $FLIP --random-jitter $JITTER --random-crop $CROP --random-scale $SCALE --random-rotate $ROTATE \
                             --workdir $WORKSPACE_DIR --logdir $LOG_DIR --pretrain $PRETRAIN --eps $EPS --prior $PRIOR --use-weights $USE_WEIGHTS \
                             --ohem-thres $OHEMTHRES --ohem-keep $OHEMKEEP --alpha $ALPHA --beta $BETA &&

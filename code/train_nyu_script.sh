@@ -83,3 +83,4 @@ $PYTHON -u depthest_main.py --mode $MODE --encoder $ENCODER --decoder $DECODER -
                             --gpu $GPU --use-flip $TEST_USE_FLIP --use-ms $TEST_USE_MS --logdir $LOG_DIR --resdir $TEST_RES_DIR  \
                             --resume $TEST_RESTORE_FROM 
 
+
