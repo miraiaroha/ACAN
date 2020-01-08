@@ -20,7 +20,7 @@ VAL_DEP_TXT="../datasets/nyu_path/valid_depth.txt"
 # training settings
 MODE="train"
 GPU=True
-EPOCHES=50
+EPOCHES=10
 LR=2e-4
 FINAL_LR=2e-3
 WEIGHT_DECAY=5e-4
@@ -47,9 +47,9 @@ ALPHA=0
 BETA=0
 # set the output path of checkpoints, training log.
 WORKSPACE_DIR="../workspace/"
-LOG_DIR="log_${ENCODER}${DECODER}_${DATASET}_${CLASSIFIER}_200106a"
+LOG_DIR="log_${ENCODER}${DECODER}_${DATASET}_${CLASSIFIER}_200108a"
 PRETRAIN=True
-#RESUME="${WORKSPACE_DIR}log_${ENCODER}${DECODER}_${DATASET}_${CLASSIFIER}_190703a/best.pkl"
+#RESUME="${WORKSPACE_DIR}log_${ENCODER}${DECODER}_${DATASET}_${CLASSIFIER}_200106a/best.pkl"
 ########################################################################################################################
 #  Training
 ########################################################################################################################
@@ -58,7 +58,7 @@ $PYTHON -u depthest_main.py --mode $MODE --encoder $ENCODER --decoder $DECODER -
                             --dataset $DATASET --rgb-dir $RGB_DIR --dep-dir $DEP_DIR --train-rgb $TRAIN_RGB_TXT --train-dep $TRAIN_DEP_TXT \
                             --val-rgb $VAL_RGB_TXT --val-dep $VAL_DEP_TXT --batch  $BATCHSIZE --batch-val $BATCHSIZEVAL \
                             --optimizer $OPTIMIZER --weight-decay $WEIGHT_DECAY --lr $LR --final-lr $FINAL_LR --gpu $GPU \
-                            --scheduler $SCHEDULER --power $POWER \
+                            --scheduler $SCHEDULER --power $POWER --resume $RESUME \
                             --random-flip $FLIP --random-jitter $JITTER --random-crop $CROP --random-scale $SCALE --random-rotate $ROTATE \
                             --workdir $WORKSPACE_DIR --logdir $LOG_DIR --pretrain $PRETRAIN --eps $EPS --prior $PRIOR --use-weights $USE_WEIGHTS \
                             --ohem-thres $OHEMTHRES --ohem-keep $OHEMKEEP --alpha $ALPHA --beta $BETA &&

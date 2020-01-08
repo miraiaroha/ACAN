@@ -34,6 +34,7 @@ def train(args, net, datasets, criterion, optimizer, scheduler):
 
         if args.resume != '':
             Trainer.reload(resume=args.resume, mode='finetune')
+            print('Finetuning from {}'.format(args.resume))
         else:
             Trainer.reload(resume=resnet, mode='finetune')
     elif args.retain:

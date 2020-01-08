@@ -4,7 +4,6 @@ PYTHON="$HOME/anaconda3/envs/tensorflow/bin/python"
 ENCODER="resnet101"
 DECODER="attention"
 DATASET="nyu"
-NUM_CLASSES=80
 ## experimental settings
 CLASSIFIER="OR"
 INFERENCE="soft"
