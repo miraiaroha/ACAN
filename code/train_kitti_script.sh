@@ -77,7 +77,7 @@ TEST_USE_FLIP=True
 TEST_USE_MS=False
 INFERENCE='soft'
 TEST_CHECKPOINT="best.pkl"
-TEST_RESTORE_FROM="${WORKSPACE_DIR}${TRAIN_LOG_DIR}/${TEST_CHECKPOINT}"
+TEST_RESTORE_FROM="${WORKSPACE_DIR}${LOG_DIR}/${TEST_CHECKPOINT}"
 $PYTHON -u depthest_main.py --mode $MODE --encoder $ENCODER --decoder $DECODER --classifier $CLASSIFIER --inference $INFERENCE --classes $NUM_CLASSES \
                             --dataset $DATASET --rgb-dir $RGB_DIR --dep-dir $DEP_DIR --test-rgb $TEST_RGB_TXT --test-dep $TEST_DEP_TXT \
                             --gpu $GPU --use-flip $TEST_USE_FLIP --use-ms $TEST_USE_MS --logdir $LOG_DIR --resdir $TEST_RES_DIR  \
