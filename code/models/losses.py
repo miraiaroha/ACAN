@@ -41,7 +41,7 @@ class AttentionLoss2d(_BaseKLDivergence):
         b, _, h, w = depth.shape
         M = depth.reshape((b, h * w, 1))
         N = depth.reshape((b, 1, h * w))
-        W = F.softmax(torch.abs(torch.log(M) - torch.log(N)), -1)
+        W = F.softmax(-torch.abs(torch.log(M) - torch.log(N)), -1)
         W[torch.isnan(W)] = 0
         return W
 

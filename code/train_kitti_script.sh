@@ -19,7 +19,7 @@ VAL_DEP_TXT="../datasets/kitti_path/eigen_test_depth_files.txt"
 # training settings
 MODE="train"
 GPU=True
-EPOCHES=50
+EPOCHES=10
 LR=2e-4
 FINAL_LR=2e-3
 WEIGHT_DECAY=5e-4
@@ -46,8 +46,8 @@ ALPHA=0
 BETA=0
 # set the output path of checkpoints, training log.
 WORKSPACE_DIR="../workspace/"
-LOG_DIR="log_${ENCODER}${DECODER}_${DATASET}_${CLASSIFIER}_200108a"
-#RESUME="${WORKSPACE_DIR}log_${ENCODER}${DECODER}_${DATASET}_${CLASSIFIER}_200106a/best.pkl"
+LOG_DIR="log_${ENCODER}${DECODER}_${DATASET}_${CLASSIFIER}_200112a"
+#RESUME="${WORKSPACE_DIR}log_${ENCODER}${DECODER}_${DATASET}_${CLASSIFIER}_200108a/best.pkl"
 PRETRAIN=True
 ########################################################################################################################
 #  Training

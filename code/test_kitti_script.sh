@@ -17,12 +17,12 @@ TEST_RES_DIR="res"
 # testing settings
 MODE="test"
 GPU=True
-TEST_USE_FLIP=False
+TEST_USE_FLIP=True
 TEST_USE_MS=False
 INFERENCE='soft'
 # set the output path of checkpoints, training log.
 WORKSPACE_DIR="../workspace/"
-LOG_DIR="log_${ENCODER}${DECODER}_${DATASET}_${CLASSIFIER}_200108a"
+LOG_DIR="log_${ENCODER}${DECODER}_${DATASET}_${CLASSIFIER}_200112att"
 TEST_CHECKPOINT="best.pkl"
 TEST_RESTORE_FROM="${WORKSPACE_DIR}${LOG_DIR}/${TEST_CHECKPOINT}"
 $PYTHON -u depthest_main.py --mode $MODE --encoder $ENCODER --decoder $DECODER --classifier $CLASSIFIER --inference $INFERENCE --classes $NUM_CLASSES \

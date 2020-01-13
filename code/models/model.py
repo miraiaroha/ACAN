@@ -274,6 +274,7 @@ class ResNet(BaseClassificationModel_):
 if __name__ == '__main__':
     net_kwargs = {'min_depth': 0, 'max_depth': 10, 'num_classes': 80,
                   'classifierType': 'OR', 'inferenceType': 'soft', 'decoderType': 'attention',
+                  'height': 160, 'width': 640,
                   'alpha': 0, 'beta': 0, 'layers': [3, 4, 6, 3]}
 
     net = ResNet(**net_kwargs)
