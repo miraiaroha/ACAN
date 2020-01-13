@@ -20,7 +20,7 @@ VAL_DEP_TXT="../datasets/nyu_path/valid_depth.txt"
 # training settings
 MODE="train"
 GPU=True
-EPOCHES=10
+EPOCHES=50
 LR=2e-4
 FINAL_LR=2e-3
 WEIGHT_DECAY=5e-4
