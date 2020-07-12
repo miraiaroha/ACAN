@@ -3,6 +3,7 @@
 Pytorch implementation of ACAN for monocular depth estimation.</br>
 More detalis [arXiv](https://arxiv.org/abs/1901.10137) </br>
 
+![image](https://github.com/miraiaroha/ACAN/tree/master/images/architecture.png)
 ## Architecture
 <p align="center">
     <img src="https://github.com/miraiaroha/ACAN/tree/master/images/architecture.png"></br>
