@@ -5,7 +5,7 @@ More detalis [arXiv](https://arxiv.org/abs/1901.10137) </br>
 
 ## Architecture
 <p align="center">
-    <img src="/images/architecture.png"></br>
+    <img src="https://github.com/miraiaroha/ACAN/tree/master/images/architecture.png"></br>
 </p>
 
 ## Visualization of Attention Maps
